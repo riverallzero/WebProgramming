@@ -1,0 +1,28 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+header {
+    background: yellow;
+    width: 100%;
+    height: 15%;
+}
+
+form {
+    background: pink;
+    width: 100%;
+    height: 70%;
+    margin: 10px 10px;
+}
+
+footer {
+    background: violet;
+    width: 100%;
+    height: 15%;
+}
+
+h1 {
+    text-align: center;
+}

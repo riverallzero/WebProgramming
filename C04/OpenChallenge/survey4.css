@@ -1,0 +1,14 @@
+@import url(4.css);
+
+form {
+	background : pink;
+	border-style : none;
+	border-width : 1px;
+	margin-left : 10px;
+	margin-right : 10px;
+}
+.formspan {
+	font-family : gothic;
+	font-weight : bold;
+	color : blue;
+}
