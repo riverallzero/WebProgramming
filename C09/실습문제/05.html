@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>자바스크립트 연습</title>
+    <script>
+        function randomBackground() {
+            let r = Math.floor(Math.random() * 256);
+            let g = Math.floor(Math.random() * 256);
+            let b = Math.floor(Math.random() * 256);
+            document.body.style.backgroundColor =
+                "rgb(" + r + "," + g + "," + b + ")";
+        }
+    </script>
+</head>
+<body ondblclick="randomBackground()">
+<h3>바탕 아무 곳에나 더블 클릭</h3>
+<hr>
+<p>바탕 아무 곳이나 <strong>더블클릭</strong>하면
+    배경색이 랜덤하게 변합니다.
+</p>
+</body>
+</html>

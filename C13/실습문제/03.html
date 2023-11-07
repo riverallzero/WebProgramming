@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>다시할까요?</title>
+<script>
+let audio=null;
+
+window.onload = init;
+
+function init() {
+	audio = document.getElementById("audio");
+	audio.onended = function (e) {
+		let res = confirm("다시할까요?");
+		if(res == true) {
+			audio.play();
+		}
+	}
+}
+</script>
+</head>
+<body>
+<h3>애국가 연주</h3>
+<hr>
+<audio id="audio" src="../../media/Aegukga.mp3" controls>
+	웹 브라우저가 audio 태그를 지원하지 않습니다.
+</audio>
+</body>
+</html>

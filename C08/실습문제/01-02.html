@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>라면을 끓이는 순서</title>
+</head>
+<body>
+<h3>라면을 끓이는 순서</h3>
+<hr>
+<ol type="A">
+    <li>물을 끓인다.</li>
+    <li>라면과 스프를 넣는다.</li>
+    <li>파를 썰어 넣는다.</li>
+    <li>5분 후 <strong>맛있게</strong> 먹는다.</li>
+</ol>
+<script>
+    let liArray = document.getElementsByTagName("li");
+    for (let i = 0; i < liArray.length; i++) {
+        let obj = liArray[i];
+        obj.style.color = 'green';
+    }
+</script>
+</body>
+</html>

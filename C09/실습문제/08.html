@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>이벤트 객체의 target</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        var sw = 0;
+
+        function init() {
+            var liArray = document.getElementsByTagName("li");
+            for (var i = 0; i < liArray.length; ++i) {
+                liArray[i].onclick = click;
+            }
+
+            function click(e) {
+                reset();
+                e.target.style.fontSize = "1.3em";
+            }
+
+            function reset() {
+                for (var i = 0; i < liArray.length; ++i) {
+                    liArray[i].style.fontSize = "1em";
+                }
+            }
+        }
+
+
+    </script>
+</head>
+<body onload="init()">
+<h3>아이템을 클릭하면 1.3배 크기로</h3>
+<hr>
+<p>여름 방학 때 하고 싶은 것들</p>
+<ul>
+    <li>자전거로 대한민국 일주</li>
+    <li>책 100권 읽기</li>
+    <li>철인 3종 경기 준비</li>
+    <li>자바스크립트 정복</li>
+</ul>
+</body>
+</html>

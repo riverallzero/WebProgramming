@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>오디오 재생</title>
+</head>
+<body>
+<h3>오디오 재생</h3>
+<p>듣고 싶은 곡은 선택하고 시작 버튼을 누르면 연속하여 자동 연주합니다.</p>
+<hr>
+<audio id="audio" src="../../media/Aegukga.mp3" controls>
+    웹 브라우저가 audio 태그를 지원하지 않습니다.
+</audio>
+<div>
+    <input type="checkbox" id="Aegukga"/>
+    <label for="Aegukga">애국가</label>
+</div>
+<div>
+    <input type="checkbox" id="MoonGlow"/>
+    <label for="MoonGlow">Moon Glow</label>
+</div>
+<div>
+    <input type="checkbox" id="EmbraceableYou"/>
+    <label for="EmbraceableYou">Embraceable You</label>
+</div>
+<div>
+    <input type="checkbox" id="Aegukga"/>
+    <label for="Aegukga">애국가</label>
+</div>
+<button id="playButton">연주시작</button>
+
+<script>
+    const audio = document.getElementById("audio");
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const playButton = document.getElementById("playButton");
+
+    playButton.addEventListener("click", function () {
+        let checkedAudioSources = [];
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                checkedAudioSources.push(`../../media/${checkbox.id}.mp3`);
+            }
+        });
+
+        if (checkedAudioSources.length > 0) {
+            playAudio(checkedAudioSources, 0);
+        }
+    });
+
+    function playAudio(sources, index) {
+        if (index < sources.length) {
+            audio.src = sources[index];
+            audio.load();
+            audio.play();
+            audio.addEventListener("ended", function () {
+                playAudio(sources, index + 1);
+            });
+        }
+    }
+</script>
+</body>
+</html>

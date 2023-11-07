@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>산수를 풀어 봅시다</title>
+    <style>
+        td {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
+    <script>
+        let timer;
+
+        function startTimer() {
+            clearTimeout(timer);
+            timer = setTimeout(calc, 10000);
+        }
+
+        function calc() {
+            let total = 0;
+            let qArray = document.getElementsByClassName("question");
+            let aArray = document.getElementsByClassName("answer");
+            for (let i = 0; i < qArray.length; i++) {
+                let question = qArray[i].innerHTML;
+                let correctAnswer = Math.floor(eval(question));
+                let userAnswer = aArray[i].value;
+                if (userAnswer == "" || isNaN(userAnswer)) {
+                    total += 0;
+                    qArray[i].style.textDecoration = "line-through";
+                } else if (parseInt(userAnswer) == correctAnswer) {
+                    total += 1;
+                    qArray[i].style.textDecoration = "none";
+                } else {
+                    total += 0;
+                    qArray[i].style.textDecoration = "line-through";
+                }
+            }
+            document.getElementById("score").innerHTML = total;
+        }
+
+        function makeExpression() {
+            let qArray = document.getElementsByClassName("question");
+            let aArray = document.getElementsByClassName("answer");
+            for (let i = 0; i < qArray.length; i++) {
+                let number1 = Math.floor(Math.random() * 20) + 1;
+                let number2 = Math.floor(Math.random() * 20) + 1;
+                let op = Math.floor(Math.random() * 4);
+                let operator = "+";
+                switch (op) {
+                    case 0 :
+                        operator = "+";
+                        break;
+                    case 1 :
+                        operator = "-";
+                        break;
+                    case 2 :
+                        operator = "*";
+                        break;
+                    case 3 :
+                        operator = "/";
+                        break;
+                }
+                qArray[i].innerHTML = number1 + operator + number2;
+                qArray[i].style.textDecoration = "none";
+
+                aArray[i].value = "";
+                document.getElementById("score").innerHTML = 0;
+            }
+            startTimer();
+        }
+    </script>
+</head>
+<body onload="makeExpression()">
+<h3>산수 문제를 풀어 봅시다.</h3>
+자동으로 문제가 만들어집니다. 답 입력 후 채점 버튼을 누르세요.
+다시 버튼을 누르면 새로운 문제가 출력됩니다. 나누기 결과는 정수입니다.
+<div id="clock" onclick="controlClock()"></div>
+<hr>
+<form>
+    <table>
+        <tr>
+            <td class="question"></td>
+            <td><input class="answer" type="text" size="8"></td>
+        </tr>
+        <tr>
+            <td class="question"></td>
+            <td><input class="answer" type="text" size="8"></td>
+        </tr>
+        <tr>
+            <td class="question"></td>
+            <td><input class="answer" type="text" size="8"></td>
+        </tr>
+        <tr>
+            <td class="question"></td>
+            <td><input class="answer" type="text" size="8"></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" onclick="calc()">채점</button>
+            </td>
+            <td><span id="score">0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" onclick="makeExpression()">다시</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

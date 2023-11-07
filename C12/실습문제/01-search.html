@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>이름으로 학번 검색</title>
+    <script>
+        function search() {
+            if (!window.sessionStorage) {
+                alert("지원하지 않습니다.");
+                return;
+            }
+
+            let name = document.getElementById("name").value;
+            let sid = sessionStorage.getItem(name);
+            if (sid == null) {
+                alert(name + " 학생이 없습니다.");
+                return;
+            }
+
+            document.getElementById("sid").value = sid;
+        }
+    </script>
+</head>
+<body>
+<h3>이름으로 학번 검색</h3>
+<hr>
+<form>
+    <label>검색할 이름 <input id="name" type="text" size="10"></label>
+    <br>
+    <label>검색된 학번 <input id="sid" type="text" size="10"></label>
+    <input type="button" value="스토리지에서 검색" onclick="search()">
+</form>
+<br>
+<a href="01-store.html">이름과 학번 저장 페이지로</a>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>onkeydown</title>
+    <script>
+        function calculate(e) {
+            if (e.key == "Enter") {
+                let exp = document.getElementById("exp");
+                let result = document.getElementById("result");
+                result.value = eval(exp.value);
+            }
+        }
+    </script>
+</head>
+<body>
+<h3>계산기 만들기</h3>
+<hr>
+수식을 입력하고 &lt;Enter&gt;를 입력하세요.
+<p>
+<form>
+    식 <input type="text" id="exp" value="" onkeydown="calculate(event)"><br>
+    값 <input type="text" id="result">
+</form>
+</body>
+</html>

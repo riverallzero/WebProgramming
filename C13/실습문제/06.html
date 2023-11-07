@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>워커 태스크 만들기</title>
+    <script>
+        let calWorker = new Worker("06-calculate.js");
+
+        function send() {
+            let parameters = {
+                first: document.getElementById("first").value,
+                second: document.getElementById("second").value
+            };
+
+            calWorker.postMessage(parameters);
+        }
+
+        calWorker.onmessage = function (e) {
+            document.getElementById("result").value = e.data;
+        }
+    </script>
+</head>
+<body>
+<h3>곱셈하기</h3>
+<hr>
+<form>
+    <input id="first" type="text" size="10"> X
+    <input id="second" type="text" size="10"> =
+    <input type="button" id="calculate" onclick="send()" value="곱하기">
+    <input id="result" type="text" size="10">
+</form>
+</body>
+</html>

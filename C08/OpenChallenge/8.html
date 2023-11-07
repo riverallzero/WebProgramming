@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>갬블링 게임</title>
+    <style>
+        table {
+            border: 1px solid violet;
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 50px;
+            height: 50px;
+            padding: 0px;
+            font: italic 50px consolas, sans-serif;
+            color: blue;
+            text-align: center;
+            background: linen;
+        }
+
+        div#msg {
+            font: italic 18px consolas, sans-serif;
+            color: magenta;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        var gameon = true;
+        var gameArray = [0, 0, 0];
+
+        function gen(e) {
+            if (gameon == false)
+                return;
+
+            var n = Math.floor(Math.random() * 3);
+            var obj = e.target;
+            obj.innerHTML = n;
+
+            if (obj.id == "first")
+                gameArray[0] = n;
+            else if (obj.id == "second")
+                gameArray[1] = n;
+            else {
+                gameArray[2] = n;
+
+                var result = document.getElementById("msg");
+
+                if (gameArray[0] == gameArray[1] && gameArray[0] == gameArray[2]) {
+                    result.innerHTML = "Success(click here to do again)";
+                } else {
+                    result.innerHTML = "fail(click here to do again)";
+                }
+            }
+        }
+
+        function reset() {
+            gameArray = [0, 0, 0];
+
+            document.getElementById("first").innerHTML = 0;
+            document.getElementById("second").innerHTML = 0;
+            document.getElementById("third").innerHTML = 0;
+            document.getElementById("msg").innerHTML = "";
+
+            gameon = true;
+        }
+    </script>
+</head>
+<body>
+<h3>갬블링 게임</h3>
+<p>각 숫자를 클릭하면 0에서 2사이의 난수로 바뀝니다.
+    모두 같은 수가 나오면 승리합니다.</p>
+<hr>
+<table>
+    <tr>
+        <td id="first" onclick="gen(event)">0</td>
+        <td id="second" onclick="gen(event)">0</td>
+        <td id="third" onclick="gen(event)">0</td>
+    </tr>
+</table>
+<div id="msg" onclick="reset()"></div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>setInterval()/learInterval()</title>
+    <style>
+        div {
+            display: inline-block;
+            border: 1px solid black;
+            background: aliceblue;
+            width: 95px;
+        }
+    </style>
+    <script>
+        var time = null;
+
+        function onofftime() {
+            if (time != null) {
+                clearInterval(time);
+                time = null;
+                document.getElementById("clock").style.color = "gray";
+            } else {
+                time = setInterval("outtime(clock)", 100);
+                document.getElementById("clock").style.color = "black";
+            }
+        }
+
+        function gotime() {
+            var clock = document.getElementById("clock");
+            outtime(clock);
+            time = setInterval("outtime(clock)", 100);
+        }
+
+        function outtime(e) {
+            var date = new Date();
+            e.innerHTML = date.toLocaleTimeString()
+        }
+    </script>
+</head>
+<body onload="gotime()">
+<h3>div 태그에 시계 만들기</h3>
+<p>시계를 클릭하면 시계가 멈추고 다시 클릭하면 가기 시작한다.</p>
+<hr>
+<div id="clock" onclick="onofftime()"></div>
+</body>
+</html>

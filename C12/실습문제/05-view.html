@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>선택한 도시와 음식 보여주기</title>
+    <style>
+        div {
+            display: inline-block;
+            width: 200px;
+            border: 1px solid yellowgreen;
+            padding-left: 10px;
+        }
+    </style>
+    <script>
+        window.addEventListener("storage", storageEventListener, false);
+        window.onload = show;
+
+        function storageEventListener(e) {
+            show();
+        }
+
+        function show() {
+            if (!window.localStorage) {
+                alert("지원하지 않습니다.");
+                return;
+            }
+
+            let obj = document.getElementById("msg");
+            obj.innerHTML = "";
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                let val = localStorage.getItem(key);
+                if (i == localStorage.length - 1)
+                    obj.innerHTML += (key + "=" + val);
+                else
+                    obj.innerHTML += (key + "=" + val) + "<br>";
+            }
+        }
+    </script>
+</head>
+<body>
+<h3>선택한 도시와 음식 보여주기</h3>
+<hr>
+<div id="msg">
+    아무것도 선택하지 않았습니다.
+</div>
+</body>
+</html>

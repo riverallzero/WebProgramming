@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>mousemove로 자유롭게 그리기</title>
+    <script>
+        let canvas, context;
+
+        window.onload = init;
+
+        function init() {
+            canvas = document.getElementById("myCanvas");
+            context = canvas.getContext("2d");
+            context.lineWidth = document.getElementById("widthInput").value;
+            context.strokeStyle = document.getElementById("colorInput").value;
+
+            canvas.addEventListener("mousemove", function (e) {
+                move(e)
+            }, false);
+            canvas.addEventListener("mouseenter", function (e) {
+                over(e)
+            }, false);
+            canvas.addEventListener("mouseleave", function (e) {
+                out(e)
+            }, false);
+        }
+
+        let prevX = 0, prevY = 0;
+        let inbound = false;
+
+        function move(e) {
+            let curX = e.offsetX;
+            let curY = e.offsetY;
+
+            if (!inbound) {
+                prevX = curX;
+                prevY = curY;
+                inbound = true;
+            }
+            context.beginPath();
+            context.moveTo(prevX, prevY);
+            context.lineTo(curX, curY);
+            context.stroke();
+            prevX = curX;
+            prevY = curY;
+        }
+
+        function over(e) {
+            inbound = true;
+            prevX = e.offsetX;
+            prevY = e.offsetY;
+        }
+
+        function out(e) {
+            inbound = false;
+        }
+    </script>
+</head>
+<body>
+<h3>mousemove로 자유롭게 그리세요</h3>
+<hr>
+선굵기 :<input type="number" id="widthInput" value="2"
+            min="0" max="20" step="1" onchange="context.lineWidth=this.value">
+선 색 : <input type="color" id="colorInput" value="#00ff00" onchange="context.strokeStyle=this.value">
+<br><br>
+<canvas id="myCanvas" style="background-color:aliceblue"
+        width="500" height="250"></canvas>
+</body>
+</html>

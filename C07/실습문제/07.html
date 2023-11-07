@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>17개의 CSS2 색이름과 색</title>
+    <style>
+        div {
+            display: inline-block;
+            width: 60px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<h3>17개의 CSS2 색이름과 색</h3>
+<hr>
+<script>
+    let colorNames = ["maroon", "red", "orange", "yellow", "olive",
+        "purple", "fuchsia", "white", "lime", "green",
+        "navy", "blue", "aqua", "teal", "black", "silver", "gray"];
+
+    for (let i = 0; i < colorNames.length; i++) {
+        let str = "<div style='background-color:";
+        str += colorNames[i];
+        str += "'>" + colorNames[i] + "</div>";
+        document.write(str);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>오륜기 그리기</title>
+<script>
+window.onload = function () {
+	let canvas = document.getElementById("myCanvas");
+	let context = canvas.getContext("2d");
+	drawOlympicRings(context);
+}
+
+function drawCircle(ctx, x, y, radius, color) {
+	ctx.beginPath();
+	ctx.arc(x, y, radius, 0, 2*Math.PI);
+	ctx.lineWidth = 3;
+	ctx.strokeStyle = color;
+	ctx.stroke();
+}
+function drawOlympicRings(ctx, xArray, yArray) {
+	let startX = 60;
+	let startY = 60;
+	let radius = 30;
+	
+	const colors = ["deepskyblue", "black", "red", "yellow", "green"];
+	let x = startX;
+	let y = startY;
+	let gap = 6;
+	for(let i=0; i<3; i++) {
+		drawCircle(ctx, x, y, radius, colors[i]);
+		x += radius*2+gap;
+	}
+	x = startX + radius + gap/2; 
+	y = startY + radius;
+	for(let j=3; j<5; j++) {
+		drawCircle(ctx, x, y, radius, colors[j]);
+		x += radius*2+gap;
+	}
+}
+</script>
+</head>
+<body>
+<h3>오륜기 그리기</h3>
+<hr>
+<canvas id="myCanvas" width="300" height="150" 
+        style="background-color:aliceblue"></canvas>
+</body>
+</html>

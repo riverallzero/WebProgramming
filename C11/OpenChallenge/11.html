@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>캔버스에 파이 차트 그리기</title>
+    <style>
+        td {
+            text-align: left;
+        }
+
+        input {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<h3>학점 별로 학생 수를 입력하면 파이 차트로 비율 그리기</h3>
+<hr>
+<form>
+    <table>
+        <tr>
+            <td>A <input id="A" type="number" value="0"></input> 명</td>
+            <td>B <input id="B" type="number" value="0"></input> 명</td>
+            <td>C <input id="C" type="number" value="0"></input> 명</td>
+        </tr>
+        <tr>
+            <td>D <input id="D" type="number" value="0"></input> 명</td>
+            <td>F <input id="F" type="number" value="0"></input> 명</td>
+            <td>
+                <button type="button" onclick="drawChart()">차트 그리기</button>
+            </td>
+    </table>
+</form>
+<canvas id="myCanvas" style="background-color: aliceblue;" width="650" height="450"></canvas>
+<script>
+    function drawChart() {
+        var canvas = document.getElementById("myCanvas");
+        var context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        var colors = ["blue", "green", "yellow", "magenta", "red"];
+        var grades = ["A", "B", "C", "D", "F"];
+        var score = new Array();
+        var total = 0;
+        for (var i = 0; i < grades.length; i++) {
+            score[i] = parseInt(document.getElementById(grades[i]).value);
+            total += score[i];
+        }
+        if (total == 0)
+            return;
+
+        context.font = "15px Gothic";
+        context.lineWidth = 2;
+        var endAngle = 0;
+
+        for (var i = 0; i < grades.length; i++) {
+            context.fillStyle = "blue";
+            context.fillText(grades[i] + " 학점" + Math.floor((score[i] / total * 100).toFixed(1)) + "% : " + colors[i], 10, 20 + 20 * i);
+        }
+
+        for (var i = 0; i < score.length; i++) {
+            context.fillStyle = colors[i];
+            context.beginPath();
+            context.moveTo(320, 220);
+            var startAngle = endAngle;
+            endAngle += 2 * score[i] * Math.PI / total;
+            context.arc(320, 220, 200, startAngle, endAngle);
+            context.closePath();
+            context.fill();
+        }
+    }
+</script>
+</body>
+</html>

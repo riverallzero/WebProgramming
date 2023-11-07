@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>자바스크립트 코드 위치</title>
+    <script>
+        function over(obj) {
+            obj.style.background = "yellow";
+        }
+
+        function out(obj) {
+            obj.style.background = "white";
+        }
+    </script>
+</head>
+<body>
+<h3>마우스를 올려 보세요</h3>
+<hr>
+<div onmouseover="over(this)" onmouseout="out(this)">
+    여기에 마우스를 올리면 배경색이 노란색으로 변합니다.
+</div>
+</body>
+</html>

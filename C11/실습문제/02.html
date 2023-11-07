@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>drawPolygon() 만들기</title>
+    <script>
+        function drawPolygon(ctx, xArray, yArray) {
+            ctx.beginPath();
+            ctx.moveTo(xArray[0], yArray[0]);
+
+            for (let i = 1; i < xArray.length; i++) {
+                ctx.lineTo(xArray[i], yArray[i]);
+            }
+
+            ctx.closePath();
+            ctx.stroke();
+        }
+    </script>
+</head>
+<body>
+<h3>drawCircle() 만들기</h3>
+<hr>
+<canvas id="myCanvas" width="220" height="220"
+        style="background-color:aliceblue"></canvas>
+<script>
+    let canvas = document.getElementById("myCanvas");
+    let context = canvas.getContext("2d");
+    let xs = [100, 10, 150, 210]
+    let ys = [10, 100, 200, 60]
+    drawPolygon(context, xs, ys)
+</script>
+</body>
+</html>

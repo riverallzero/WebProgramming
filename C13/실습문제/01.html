@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>자바스크립트로 비디오 제어</title>
+</head>
+<body>
+<h3>자바스크립트로 비디오 제어</h3>
+<hr>
+<video id="video" width="320" height="240">
+	<source src="media/bear.mp4"  type="video/mp4">
+	웹 브라우저가 video 태그를 지원하지 않습니다.
+</video>
+<div id="msg">이곳에 비디오 제어 메시지 출력</div>
+<button id="play" onclick="control(event)">play</button>
+<button id="pause" onclick="control(event)">pause</button>
+<button id="replay" onclick="control(event)">replay</button>
+<button id="vol-" onclick="control(event)">vol-</button>
+<button id="vol+" onclick="control(event)">vol+</button>
+<button id="mute on/off" onclick="control(event)">mute on/off</button>
+<script>
+let divEmt = document.getElementById("msg");
+let video = document.getElementById("video");
+
+function control(e) {
+	if(e.target.id == "play") { // play 버튼 클릭
+		video.play(); // 재생
+		//divEmt.innerHTML = video.src + "를 재생중입니다.";
+		divEmt.innerHTML = getSource(video) + "를 재생중입니다.";
+	}
+	else if(e.target.id == "pause") { // pause 버튼 클릭
+		video.pause(); // 일시 중지
+		divEmt.innerHTML = "일시중지되었습니다.";
+	}
+	else if(e.target.id == "replay") { // replay 버튼 클릭
+		video.load(); // src에 지정된 미디어 다시 로딩
+		video.play(); // 처음부터 다시 재생
+		divEmt.innerHTML = getSource(video) + "를 처음부터 다시 재생합니다.";
+	}	
+	else if(e.target.id == "vol-") { // vol- 버튼 클릭
+		if(video.volume <= 0.1) video.volume = 0;
+		else video.volume -= 0.1; // 음량 0.1 감소
+		divEmt.innerHTML = "음량 0.1 감소." + "현재 " + video.volume;
+	}	 
+	else if(e.target.id == "vol+") { // vol+ 버튼 클릭
+		if(video.volume >= 0.9) video.volume = 1.0;		
+		else video.volume += 0.1; // 음량 0.1 증가
+		divEmt.innerHTML = "음량 0.1 증가." + "현재 " + video.volume;;
+	}
+	else if(e.target.id == "mute on/off") { // mute on/off 버튼 클릭
+		video.muted = !video.muted; // 음소거 토글
+		if(video.muted) divEmt.innerHTML = "음소거";
+		else divEmt.innerHTML = "음소거 해제";
+	}	
+}
+
+// <video><source></video> 구조로 된 경우, 비디도 파일명을 가진 src 찾기
+function getSource(v) {
+	let child = v.firstElementChild;	
+	for(let i=0; i<v.childElementCount; i++) {
+		if(child.tagName == "SOURCE")
+			return child.src;
+		child = child.nextElementSibling;
+	}
+	return "";
+}
+</script>
+</body>
+</html>

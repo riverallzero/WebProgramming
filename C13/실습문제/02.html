@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>오디오 재생</title>
+    <style>
+        span {
+            border: 1px solid yellowgreen;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        td, th {
+            padding-right: 5px;
+            text-align: left;
+        }
+        .playing {
+            color: magenta;
+        }
+    </style>
+</head>
+<body>
+<h3>오디오 재생</h3>
+<hr>
+<audio id="audio" controls>
+    웹 브라우저가 audio 태그를 지원하지 않습니다.
+</audio>
+
+<table>
+    <tr>
+        <td><span>1</span></td>
+        <th style="text-decoration: underline">애국가</th>
+        <td>
+            <button class="play-button" data-audio="Aegukga.mp3">재생</button>
+            <button class="stop-button">중지</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td><span>2</span></td>
+        <th style="text-decoration: underline">Moon Glow</th>
+        <td>
+            <button class="play-button" data-audio="MoonGlow.mp3">재생</button>
+            <button class="stop-button">중지</button>
+        </td>
+    </tr>
+    <tr>
+        <td><span>3</span></td>
+        <th style="text-decoration: underline">Embraceable You</th>
+        <td>
+            <button class="play-button" data-audio="EmbraceableYou.mp3">재생</button>
+            <button class="stop-button">중지</button>
+        </td>
+    </tr>
+</table>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let audio = document.getElementById('audio');
+        let currentSong = null;
+
+        let playButtons = document.querySelectorAll('.play-button');
+        let stopButtons = document.querySelectorAll('.stop-button');
+
+        playButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                let songTitle = this.parentNode.parentNode.querySelector('th');
+                if (currentSong !== null) {
+                    currentSong.classList.remove('playing');
+                }
+                currentSong = songTitle;
+                currentSong.classList.add('playing');
+
+                let audioFileName = this.getAttribute('data-audio');
+                if (audioFileName) {
+                    audio.src = `../../media/${audioFileName}`;
+                }
+                audio.play();
+            });
+        });
+
+        stopButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                audio.pause();
+            });
+        });
+    });
+</script>
+</body>
+</html>

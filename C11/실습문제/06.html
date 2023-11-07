@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>폼으로 원호 그리기</title>
+    <style>
+        td {
+            text-align: right;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    </style>
+    <script>
+        let canvas = null, context = null;
+
+        window.onload = init;
+
+        function init() {
+            canvas = document.getElementById("myCanvas");
+            context = canvas.getContext("2d");
+        }
+
+        function draw() {
+            if (canvas == null || context == null)
+                return;
+            let x = parseInt(document.getElementById("x").value);
+            let y = parseInt(document.getElementById("y").value);
+            let radius = parseInt(document.getElementById("radius").value);
+            let startAngle = parseInt(document.getElementById("start").value);
+            let endAngle = parseInt(document.getElementById("end").value);
+            let lineWidth = parseInt(document.getElementById("lineWidth").value);
+            let strokeStyle = document.getElementById("strokeStyle").value;
+            let direction = document.getElementById("direction").value;
+
+            context.beginPath();
+            if (direction === "1") {
+                context.arc(x, y, radius, (startAngle * Math.PI) / 180, (endAngle * Math.PI) / 180, false);
+            } else if (direction === "2") {
+                context.arc(x, y, radius, (startAngle * Math.PI) / 180, (endAngle * Math.PI) / 180, true);
+            }
+            context.lineWidth = lineWidth;
+            context.strokeStyle = strokeStyle;
+            context.stroke();
+        }
+
+        function erase() {
+            if (canvas == null || context == null)
+                return;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</head>
+<body>
+<h3>폼으로 원호 그리기</h3>
+<hr>
+<form>
+    <table>
+        <tr>
+            <td><label>x <input id="x" type="number" value="250"></label></td>
+            <td><label>y <input id="y" type="number" value="100"></label></td>
+        </tr>
+        <tr>
+            <td><label>반지름 <input id="radius" type="number" value="100"></label></td>
+            <td><label>방향
+                <select id="direction">
+                    <option value="1">시계방향</option>
+                    <option value="2">반시계방향</option>
+                </select></label></td>
+        </tr>
+        <tr>
+            <td><label>시작각도 <input id="start" type="number" value="180"></label></td>
+            <td><label>끝각도 <input id="end" type="number" value="360"></label></td>
+        </tr>
+        <tr>
+            <td><label>선굵기 <input id="lineWidth" type="number" value="20"></label></td>
+            <td><label>선색 <input id="strokeStyle" type="color" value="#000000"></label></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" onclick="draw()">그리기</button>
+            </td>
+            <td>
+                <button type="button" onclick="erase()">지우기</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<canvas id="myCanvas" width="500" height="200" style="background-color: aliceblue"></canvas>
+</body>
+</html>

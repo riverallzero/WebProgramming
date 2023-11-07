@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>일기 쓰기</title>
+    <script>
+        function store() {
+            if (!window.localStorage) {
+                alert("지원하지 않습니다.");
+                return;
+            }
+            let time = new Date();
+            let year = time.getFullYear();
+            let month = time.getMonth() + 1;
+            let day = time.getDate();
+
+            today_date = `${year}.${month}.${day}`;
+            let memo = document.getElementById("memo").value;
+            localStorage.setItem(today_date, memo);
+
+            document.getElementById("date_label").textContent = today_date;
+        }
+
+        function view() {
+            window.open("04-view.html", "viewwin");
+        }
+    </script>
+</head>
+<body>
+<h3>일기쓰기</h3>
+<hr>
+<form>
+    <label id="date_label">
+        <script>document.write("오늘 " + new Date().toLocaleDateString());</script>
+        <br>
+        <textarea id="memo" cols="30" rows="5"></textarea>
+    </label>
+    <br>
+    <input type="button" value="저장" onclick="store()">
+    <input type="button" value="보기" onclick="view()">
+</form>
+</body>
+</html>

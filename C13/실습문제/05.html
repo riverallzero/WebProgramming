@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>워커 태스크 만들기</title>
+<script>
+let worker=null;
+
+function startWorkTask() {
+	// 워커 태스크를 생성하고 decideGrade.js를 실행하도록 지시
+	worker = new Worker("prac13-05-decideGrade.js");
+}
+
+function calculate() {
+	let score = prompt("점수를 숫자로 입력하세요", "");
+	if(score == null || isNaN(score) == true) {
+		alert("숫자로 입력하세요");
+		return; // "점수를 숫자로 입력하세요"
+	}
+	
+	if(worker == null) {
+		alert("워커 태스크가 만들어지지 않았음");		
+		return; // 어떤 문제가 있는 상태
+	}
+
+	if(parseInt(score) > 100 || parseInt(score) < 0) {
+		alert("점수가 0~100 사이가 아님");		
+		return; // 잘못된 입력
+	}
+	
+	// 입력된 점수 출력
+	let msgArea = document.getElementById("msg");
+	msgArea.innerHTML += score;
+		
+	
+	// 입력 받은 점수를 워커 태스크로 보내기
+	worker.postMessage(score);
+	
+	// 워커 태스크로부터 결과 수신 대기
+	worker.onmessage = function (e) {
+		let msgArea = document.getElementById("msg");
+		msgArea.innerHTML += "=" + e.data + "<br>";
+	}
+}
+</script>
+</head>
+<body onload="startWorkTask()">
+<h3>학점 매기기</h3>
+<hr>
+<button onclick="calculate()">점수 입력</button>
+<div id="msg"></div>
+</body>
+</html>

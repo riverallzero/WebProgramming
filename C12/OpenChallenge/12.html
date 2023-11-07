@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>단어장 만들기</title>
+    <script>
+        function store() {
+            if (!window.localStorage) {
+                alert("지원하지 않습니다.");
+                return;
+            }
+            var engWord = document.getElementById("eng").value;
+            engWord = engWord.trim();
+            var korWord = document.getElementById("kor").value;
+            korWord = korWord.trim();
+
+            // 단어가 이미 있는지 확인
+            if (localStorage.getItem(engWord) != null) {
+                var ret = confirm(engWord + "가 이미 있습니다. 수정하시겠습니까?");
+                if (ret == false) // 수정을 원치 않으면 그냥 리턴
+                    return;
+            }
+
+            // 로컬 스토리지에 저장(혹은 수정)
+            var ret = localStorage.setItem(engWord, korWord);
+
+            // 저장 후 <input>에 입력된 단어 지우기
+            document.getElementById("eng").value = "";
+            document.getElementById("kor").value = "";
+        }
+
+        function search() {
+            if (!window.localStorage) {
+                alert("지원하지 않습니다.");
+                return;
+            }
+            var engWord = document.getElementById("eng").value;
+            if (engWord == "")
+                return; // 입력된 것이 없음
+
+            engWord = engWord.trim(); // 앞 뒤 빈칸 삭제
+            var korWord = localStorage.getItem(engWord);
+            if (korWord == null) {
+                alert(engWord + "는 없는 단어입니다.");
+                document.getElementById("kor").value = "";
+                return;
+            }
+
+            var korObj = document.getElementById("kor");
+            korObj.value = korWord;
+        }
+
+        function remove() {
+            if (!window.localStorage) {
+                alert("지원하지 않습니다.");
+                return;
+            }
+            var engWord = document.getElementById("eng").value;
+            if (engWord == "")
+                return; // 입력된 것이 없음
+
+            // 단어가 있는지 확인
+            engWord = engWord.trim(); // 앞 뒤 빈칸 삭제
+            if (localStorage.getItem(engWord) == null) {
+                alert(engWord + "가 없습니다.");
+                return;
+            }
+
+            // 단어 삭제
+            var korWord = localStorage.removeItem(engWord);
+
+            // 사용자 입력 칸 지우기
+            document.getElementById("eng").value = "";
+            document.getElementById("kor").value = engWord + " 삭제됨";
+        }
+
+        function viewAll() {
+            var win = window.open("view.html", "viewwin");
+        }
+    </script>
+</head>
+<body>
+<h3>나의 단어장 만들기</h3>
+<hr>
+<form>
+    <label>영어 <input id="eng" type="text" size="20"></label><br>
+    <label>한글 <input id="kor" type="text" size="20"></label><br>
+    <br>
+    <input type="button" value="단어 저장" onclick="store()">
+    <input type="button" value="영단어 검색" onclick="search()">
+    <input type="button" value="단어 삭제" onclick="remove()">
+    <input type="button" value="전체 보기" onclick="viewAll()">
+</form>
+</body>
+</html>

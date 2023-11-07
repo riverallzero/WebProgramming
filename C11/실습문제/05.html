@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>폼으로 도형 그리기</title>
+    <style>
+        td {
+            text-align: right;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    </style>
+    <script>
+        let canvas = null, context = null;
+
+        window.onload = init;
+
+        function init() {
+            canvas = document.getElementById("myCanvas");
+            context = canvas.getContext("2d");
+        }
+
+        function draw() {
+            if (canvas == null || context == null)
+                return;
+            let x = document.getElementById("x").value;
+            let y = document.getElementById("y").value;
+            let width = document.getElementById("width").value;
+            let height = document.getElementById("height").value;
+            let lineWidth = document.getElementById("lineWidth").value;
+            let strokeStyle = document.getElementById("strokeStyle").value;
+            context.beginPath();
+            context.rect(x, y, width, height);
+            context.lineWidth = lineWidth;
+            context.strokeStyle = strokeStyle;
+            context.stroke();
+        }
+
+        function erase() {
+            if (canvas == null || context == null)
+                return;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</head>
+<body>
+</body>
+<h3>폼으로 사각형 그리기</h3>
+<hr>
+<form>
+    <table>
+        <tr>
+            <td><label>x <input id="x" type="number" value="10"></label></td>
+            <td><label>y <input id="y" type="number" value="10"></label></td>
+        </tr>
+        <tr>
+            <td><label>width <input id="width" type="number" value="100"></label></td>
+            <td><label>height <input id="height" type="number" value="100"></label></td>
+        </tr>
+        <tr>
+            <td><label>선굵기 <input id="lineWidth" type="number" value="1"></label></td>
+            <td><label>선색 <input id="strokeStyle" type="color" value="#000000"></label></td>
+        </tr>
+        <tr>
+            <td><label>
+                <button type="button" onclick="draw()">그리기</button>
+            </label></td>
+            <td>
+                <button type="button" onclick="erase()">지우기</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<canvas id="myCanvas" width="500" height="200"
+        style="background-color:aliceblue"></canvas>
+</html>

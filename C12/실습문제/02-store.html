@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>세션 스토리지에 구입 리스트 저장</title>
+    <script>
+        function store() {
+            if (!window.sessionStorage) {
+                alert("지원하지 않습니다.");
+                return;
+            }
+            let item = document.getElementById("item").value;
+            let count = document.getElementById("count").value;
+            sessionStorage.setItem(item, count);
+        }
+    </script>
+</head>
+<body>
+<h3>세션 스토리지에 구입 리스트 저장</h3>
+<hr>
+<form>
+    <label>품목명: <input id="item" type="text" size="10"></label>
+    <label>개수: <input id="count" type="text" size="10"></label>
+    <input type="button" value="저장" onclick="store()">
+</form>
+</body>
+</html>

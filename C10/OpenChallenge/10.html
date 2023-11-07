@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>눈 내리는 사걀의 마을</title>
+    <style>
+        body {
+            background-image: url("../../media/snow.jpg");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+        div.snow {
+            position: absolute;
+            font-size: 40px;
+            color: white;
+        }
+    </style>
+    <script>
+        var snow = new Array(30);
+        var x = new Array(30);
+        var y = new Array(30);
+        var speedOfFall = new Array(30);
+        var speedOfwind = new Array(30);
+        var step = new Array(30);
+
+        function fall() {
+            for (i = 0; i < 30; i++) {
+                y[i] += speedOfFall[i]
+                x[i] += Math.cos(speedOfwind[i]);
+                if (y[i] >= window.innerHeight - 60) {
+                    x[i] = Math.floor(Math.random() * window.innerWidth);
+                    y[i] = 0;
+                    speedOfFall[i] = Math.random() * 2 + 2;
+                }
+                if (x[i] >= window.innerWidth - 50)
+                    x[i] = window.innerWidth - 50;
+                else if (x[i] < 0)
+                    x[i] = 50;
+                snow[i].style.top = y[i] + "px";
+                snow[i].style.left = x[i] + "px";
+                speedOfwind[i] += step[i];
+            }
+            setTimeout("fall()", 50);
+        }
+    </script>
+</head>
+<body onload="fall()">
+<script>
+    makeSnow();
+
+    function makeSnow() {
+        for (var i = 0; i < 30; i++) {
+            x[i] = Math.floor(Math.random() * window.innerWidth - 10);
+            y[i] = Math.floor(Math.random() * window.innerHeight + 10);
+            speedOfFall[i] = Math.random() * 2 + 2;
+            speedOfwind[i] = 1;
+            step[i] = Math.random() * 0.1 + 0.05;
+
+            var divtag = "<div class = 'snow' id = snowobj" + i + " style = 'top: " + x[i] + "px; left: " + y[i] + "px'> * </div>";
+            document.write(divtag);
+            snow[i] = document.getElementById("snowobj" + i)
+        }
+    }
+</script>
+</body>
+</html>

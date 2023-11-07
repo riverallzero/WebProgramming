@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>onmouseover과 onmouseout</title>
+    <script>
+        let text = ["빨간자전거를 타고 서울, 대전, 대구, 부산 찍고, 목포, 인천을 거쳐 달린다",
+            "한국 고전 50권, 외국 고전 50권을 읽는 목표",
+            "아침에는 수영을 배우고, 점심먹고 자전거 훈련 30KM, 저녁에는 10KM 달리기 하기",
+            "문제가 많고 잘 정리된 자바스크립트 책을 구입하여 본격적으로 연습문제 풀기"];
+        let commentDiv;
+
+        function init() {
+            commentDiv = document.getElementById("commentDiv");
+
+            let liArray = document.getElementsByTagName("li");
+            for (let i = 0; i < liArray.length; i++) {
+                liArray[i].addEventListener("mouseover", over, false);
+                liArray[i].addEventListener("mouseout", hideCommentDiv, false);
+            }
+        }
+
+        function over(e) {
+            let n = 0;
+            switch (e.target.id) {
+                case "l0" :
+                    n = 0;
+                    break;
+                case "l1" :
+                    n = 1;
+                    break;
+                case "l2" :
+                    n = 2;
+                    break;
+                case "l3" :
+                    n = 3;
+                    break;
+            }
+            setCommentDiv(text[n], e);
+        }
+
+        function setCommentDiv(comment, e) {
+            commentDiv.innerHTML = comment;
+            commentDiv.style.left = e.clientX + "px";
+            commentDiv.style.top = e.clientY + "px";
+            commentDiv.style.border = "1px solid yellowgreen";
+            commentDiv.style.background = "aliceblue";
+            commentDiv.style.visibility = "visible";
+            commentDiv.style.width = "200px";
+            commentDiv.style.height = "80px";
+        }
+
+        function hideCommentDiv() {
+            commentDiv.style.visibility = "hidden";
+        }
+
+    </script>
+</head>
+<body onload="init()">
+<h3>아이템에 마우스를 올리면 설명 출력</h3>
+<hr>
+<p>여름 방학 때 하고 싶은 것들</p>
+<ul>
+    <li id="l0">자전거로 대한민국 일주</li>
+    <li id="l1">책 100권 읽기</li>
+    <li id="l2">철인 3종 경기 준비</li>
+    <li id="l3">자바스크립트 정복</li>
+</ul>
+<div id="commentDiv" style="position:absolute"></div>
+</body>
+</html>

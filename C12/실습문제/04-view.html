@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>일기 보기</title>
+    <style>
+        table {
+            background-color: aliceblue;
+        }
+
+        span {
+            border: 1px solid yellowgreen;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        td, th {
+            padding-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<h3>일기 보기</h3>
+<hr>
+<script>
+    if (window.localStorage) {
+        document.write("<table>");
+        for (let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            let val = localStorage.getItem(key);
+            document.write("<tr>");
+            document.write("<td><span>" + (i + 1) + "</span></td>");
+            document.write("<th>" + key + "</th>");
+            document.write("<td>" + val + "</td>");
+            document.write("</tr>");
+            document.write("<td colspan='3'><hr></td>");
+        }
+        document.write("</table>");
+    } else {
+        alert("지원하지 않습니다.");
+    }
+</script>
+</body>
+</html>

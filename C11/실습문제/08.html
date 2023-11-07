@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>캔버스에 마우스 드래깅으로 그림 그리기</title>
+    <script>
+        let canvas, context;
+
+        window.onload = init;
+
+        function init() {
+            canvas = document.getElementById("myCanvas");
+            context = canvas.getContext("2d");
+
+            context.lineWidth = 2;
+            context.strokeStyle = "blue";
+
+            canvas.addEventListener("mousemove", function (e) {
+                move(e)
+            }, false);
+            canvas.addEventListener("mousedown", function (e) {
+                down(e)
+            }, false);
+            canvas.addEventListener("mouseup", function (e) {
+                up(e)
+            }, false);
+            canvas.addEventListener("mouseout", function (e) {
+                out(e)
+            }, false);
+        }
+
+        let startX = 0, startY = 0;
+        let dragging = false;
+
+        function draw(curX, curY) {
+            context.beginPath();
+            context.moveTo(startX, startY);
+            context.lineTo(curX, curY);
+            context.stroke();
+        }
+
+        function down(e) {
+            startX = e.offsetX;
+            startY = e.offsetY;
+            dragging = true;
+        }
+
+        function up(e) {
+            dragging = false;
+        }
+
+        function move(e) {
+            if (!dragging) return;
+            let curX = e.offsetX, curY = e.offsetY;
+            draw(curX, curY);
+            startX = curX;
+            startY = curY;
+        }
+
+        function out(e) {
+            dragging = false;
+        }
+    </script>
+</head>
+<body>
+<h3>마우스를 누른 채 드래깅하여 그림을 그려 보세요</h3>
+<hr>
+<canvas id="myCanvas" style="background-color:aliceblue"
+        width="500" height="250"></canvas>
+<br><br>
+
+선굵기 :<input type="number" id="widthInput" value="2"
+            min="0" max="20" step="1" onchange="context.lineWidth=this.value">
+선 색 : <input type="color" id="colorInput" value="#00ff00" onchange="context.strokeStyle=this.value">
+
+</body>
+</html>

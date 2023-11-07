@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>마우스 클릭 연습</title>
+    <style>
+        table {
+            border: 1px solid blue;
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid blue;
+            width: 50px;
+            height: 50px;
+            padding: 0px;
+        }
+    </style>
+    <script>
+        var select = 0; // 선택된 셀 번호
+        var img = new Image();
+        img.src = "../../media/donkey.png"; // 45x45 크기. 미리 로딩
+
+        function set() {
+            var table = document.getElementById("table1");
+
+            for (var i = 0; i < 10; i++) {
+                var row = document.createElement("tr");
+
+                for (var j = 0; j < 10; j++) {
+                    var col = document.createElement("td");
+                    col.innerHTML = "<img src=''>"
+                    row.appendChild(col);
+                }
+                table.appendChild(row);
+            }
+
+            // 100개의 이미지에 모두 click 리스너 등록
+            for (var i = 0; i < 100; i++) {
+                // <img> 태그 엘리먼트가 공간을 차지하지만 보이지 않게 한다.
+                document.images[i].onclick = moveImage;
+            }
+            moveImage(); // 셀을 선택하고 이미지 출력
+        }
+
+        // <img> 태그의 click 리스너
+        function moveImage() { // 다른 셀로 이미지를 옮긴다.
+            // 현재 <img>에 보여질 이미지를 제거하고, 보이지 않게 한다.
+            document.images[select].src = "";
+
+            // 0~99 사이의 랜덤한 셀을 선택
+            select = Math.floor(Math.random() * 100);
+
+            // 새로 선택된 셀에 이미지 출력하고, 이미지를 보이게 한다.
+            document.images[select].src = img.src;
+        }
+    </script>
+</head>
+<body onload="set()">
+<h3>마우스 클릭 연습</h3>
+<hr>
+<table id="table1"></table>
+</body>
+</html>
