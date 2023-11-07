@@ -1,4 +1,9 @@
 # HTML5 + CSS3 + Javascript 웹 프로그래밍
+
+<div align="center" style="display:flex;">
+  <img src='.asset/book.jpg' width="250"/>
+</div>
+
 - 명품 웹 프로그래밍 교재(황기태 지음): OpenChallenge & 실습문제 코드
 - WebSite : http://webprogramming.co.kr/
 
