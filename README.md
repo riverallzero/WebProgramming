@@ -1,6 +1,7 @@
 # HTML5 + CSS3 + Javascript 웹 프로그래밍
 - 명품 웹 프로그래밍 교재(황기태 지음): OpenChallenge & 실습문제 코드
-- WebSite : http://webprogramming.co.kr/
+- 공식 웹사이트 : http://webprogramming.co.kr/
+- 코드 오류 및 제안: [Issues](https://github.com/riverallzero/WebProgramming/issues)
 
 <div align="center" style="display:flex;">
   <img src='.asset/book.jpg' width="250"/>
