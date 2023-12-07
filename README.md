@@ -1,4 +1,5 @@
 # HTML5 + CSS3 + Javascript 웹 프로그래밍
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Friverallzero%2FWebProgramming&count_bg=%23E98BCA&title_bg=%237A1B52&icon=codeigniter.svg&icon_color=%23E98BCA&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 - 명품 웹 프로그래밍 교재(황기태 지음): OpenChallenge & 실습문제 코드
 - 공식 웹사이트 : http://webprogramming.co.kr/
 - 코드 오류 및 제안: [Issues](https://github.com/riverallzero/WebProgramming/issues)
